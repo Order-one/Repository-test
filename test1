@@ -1,0 +1,38 @@
+import java.sql.*;
+public class Data{
+  public int searchuser(int k){
+    int userid=1;
+    
+      try{
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        String url="jdbc:mysql://localhost:3306/abc";
+        Connection conn=DriverManager.getConnection(url,"root","thekey");
+        Statement stmt=con.createStatement();
+        String sql="select userid from genre3 where id="+k+"";
+        ResultSet rs=stmt.execultQuery(sql);
+        while(rs.next()){
+          userid=rs.getInt("userid");
+        }
+        stmt.close();
+          conn.close();
+          }catch(Exception e){
+          e.printStackTrace();
+          }
+         return userid;
+        }
+ 
+ provide void insertrating(int userid,Syring genre){try{
+  Class.forName("com.mysql.jdbc.Driver").newInstance();
+  String url="jdbc:mysql://localhost:3306/abc";
+  Connection conn=DriverManager.getConnection(url,"root","thekey");
+  Statement stmt=conn.createStatement();
+  String sql="insert into temp(userid,similiaruty)select rating from shijirating where userid="+userid+" and genres like'%"+genre+"%'";
+  stmt.executeUpdate(sql);
+  
+  stmt.close();
+    conn.close();
+    }catch(Exception e){
+    e.printStackTrace();
+    }
+ }
+}
